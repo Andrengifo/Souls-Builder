@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Souls Builder</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Souls Builder</h1>
+
+  <div class="contenedor-build">
+
+    <!-- Columna izquierda: Armadura -->
+    <section class="panel panel-armadura">
+      <h2>Armadura</h2>
+      <label>Casco:
+      <select id="cascoSeleccionado">
+      <option value="">-- Ninguno --</option>
+      <option value="casco_caballero_elite">Elite Knight Helm</option>
+      </select>
+      </label>
+      <label>Armadura:
+      <select id="armaduraSeleccionada">
+      <option value="">-- Ninguna --</option>
+      <option value="armadura_caballero_elite">Elite Knight Armor</option>
+      </select>
+      </label>
+      <label>Guantes:
+      <select id="guantesSeleccionados">
+      <option value="">-- Ninguno --</option>
+      <option value="guantes_caballero_elite">Elite Knight Gauntlets</option>
+      </select>
+      </label>
+      <label>Botas:
+      <select id="botasSeleccionadas">
+      <option value="">-- Ninguna --</option>
+      <option value="botas_caballero_elite">Elite Knight Leggings</option>
+      </select>
+      </label>
+    </section>
+    
+    <!-- Columna central: Personaje y stats -->
+    <section class="panel panel-personaje">
+      <h2>Personaje</h2>
+      <form id="formPersonaje">
+         <div class="grid-stats">
+            <label>Vigor: <input type="number" id="vigor" value="10"></label>
+            <label>Attunement: <input type="number" id="attunement" value="10"></label>
+            <label>Endurance: <input type="number" id="endurance" value="10"></label>
+            <label>Vitality: <input type="number" id="vitality" value="10"></label>
+            <label>Strength: <input type="number" id="strength" value="10"></label>
+            <label>Dexterity: <input type="number" id="dexterity" value="10"></label>
+            <label>Intelligence: <input type="number" id="intelligence" value="10"></label>
+            <label>Faith: <input type="number" id="faith" value="10"></label>
+            <label>Luck: <input type="number" id="luck" value="10"></label>
+          </div>
+            <button type="button" id="btnCalcular">Calcular</button>
+      </form>
+
+      <div class="resultado">
+          <span>Daño (Mano Derecha)</span>
+          <p id="resultadoDanoDerecha">-</p>
+          <span>Daño (Mano Izquierda)</span>
+          <p id="resultadoDanoIzquierda">-</p>
+          <span>HP</span>
+          <p id="resultadoHP" style="font-size: 1.2rem;">-</p>
+          <span>Stamina</span>
+          <p id="resultadoStamina" style="font-size: 1.2rem;">-</p>
+          <span>Casillas de hechizo (usadas / disponibles)</span>
+          <p id="resultadoCasillas" style="font-size: 1.2rem;">-</p>
+          <p id="avisoHechizos" class="aviso"></p>
+          <span>Defensa física</span>
+          <p id="resultadoDefensa" style="font-size: 1.2rem;">-</p>
+          <span>Equip Load</span>
+          <p id="resultadoEquipLoad" style="font-size: 1rem;">-</p>
+          <span>Peso</span>
+          <p id="resultadoPorcentaje" style="font-size: 1rem;">-</p>
+          <p id="resultadoBanda" style="font-size: 0.9rem; color: #999;">-</p>
+      </div>
+    </section>
+
+    <!-- Columna derecha: Armas y accesorios -->
+    <section class="panel panel-equipo">
+      <h2>Equipo</h2>
+      <label>Arma (Mano Derecha):
+        <select id="armaDerechaSeleccionada">
+          <option value="">-- Ninguna --</option>
+          <option value="longsword">Longsword</option>
+          <option value="spear">Spear</option>
+          <option value="dagger">Dagger</option>
+          <option value="claymore">Claymore</option>
+          <option value="battle_axe">Battle Axe</option>
+        </select>
+      </label>
+
+      <label>Arma (Mano Izquierda):
+        <select id="armaIzquierdaSeleccionada">
+          <option value="">-- Ninguna --</option>
+          <option value="longsword">Longsword</option>
+          <option value="spear">Spear</option>
+          <option value="dagger">Dagger</option>
+          <option value="claymore">Claymore</option>
+          <option value="battle_axe">Battle Axe</option>
+        </select>
+      </label>
+      <label>Anillo 1:
+        <select id="anillo1Seleccionado">
+          <option value="">-- Ninguno --</option>
+          <option value="ring_favor">Ring of Favor</option>
+          <option value="hornet_ring">Hornet Ring</option>
+          <option value="flynns_ring">Flynn's Ring</option>
+        </select>
+    </label>
+    <label>Anillo 2:
+      <select id="anillo2Seleccionado">
+        <option value="">-- Ninguno --</option>
+        <option value="ring_favor">Ring of Favor</option>
+        <option value="hornet_ring">Hornet Ring</option>
+        <option value="flynns_ring">Flynn's Ring</option>
+      </select>
+  </label>
+  <label>Anillo 3:
+  <select id="anillo3Seleccionado">
+    <option value="">-- Ninguno --</option>
+    <option value="ring_favor">Ring of Favor</option>
+    <option value="hornet_ring">Hornet Ring</option>
+    <option value="flynns_ring">Flynn's Ring</option>
+  </select>
+</label>
+
+<label>Anillo 4:
+  <select id="anillo4Seleccionado">
+    <option value="">-- Ninguno --</option>
+    <option value="ring_favor">Ring of Favor</option>
+    <option value="hornet_ring">Hornet Ring</option>
+    <option value="flynns_ring">Flynn's Ring</option>
+  </select>
+</label>
+      <h3 class="subtitulo">Hechizos</h3>
+      <div id="listaHechizos"></div>
+    </section>
+
+  </div>
+
+  <script src="script.js"></script>
+  <script src="scriptjunior.js"></script>
+</body>
+</html>
