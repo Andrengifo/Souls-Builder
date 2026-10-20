@@ -4,7 +4,7 @@ A web-based build simulator for the Souls series. Pick stats, weapons, armor, ri
 
 **Live demo:** https://andrengifo.github.io/Souls-Builder/
 
-![Souls Builder screenshot](images/Screenshot%20first%20upload%20to%20Github.png)
+![Souls Builder screenshot](images/screenshot1.png)
 
 > The project currently supports **Dark Souls III**. Dark Souls 1, 2, Bloodborne and Elden Ring are planned.
 
