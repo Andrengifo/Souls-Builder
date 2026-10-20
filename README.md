@@ -2,7 +2,7 @@
 
 A web-based build simulator for the Souls series. Pick stats, weapons, armor, rings and spells, and instantly see how the build changes your damage, HP, stamina, equip load and more.
 
-**Live demo:** _coming soon_
+**Live demo:** https://andrengifo.github.io/Souls-Builder/
 
 > The project currently supports **Dark Souls III**. Dark Souls 1, 2, Bloodborne and Elden Ring are planned.
 
