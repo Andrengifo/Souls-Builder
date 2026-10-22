@@ -13,30 +13,37 @@
     <!-- Columna izquierda: Armadura -->
     <section class="panel panel-armadura">
       <h2>Armadura</h2>
-      <label>Casco:
-      <select id="cascoSeleccionado">
-      <option value="">-- Ninguno --</option>
-      <option value="casco_caballero_elite">Elite Knight Helm</option>
-      </select>
-      </label>
-      <label>Armadura:
-      <select id="armaduraSeleccionada">
-      <option value="">-- Ninguna --</option>
-      <option value="armadura_caballero_elite">Elite Knight Armor</option>
-      </select>
-      </label>
-      <label>Guantes:
-      <select id="guantesSeleccionados">
-      <option value="">-- Ninguno --</option>
-      <option value="guantes_caballero_elite">Elite Knight Gauntlets</option>
-      </select>
-      </label>
-      <label>Botas:
-      <select id="botasSeleccionadas">
-      <option value="">-- Ninguna --</option>
-      <option value="botas_caballero_elite">Elite Knight Leggings</option>
-      </select>
-      </label>
+      <div class="campo-slot">
+        <span class="etiqueta-slot">Casco</span>
+        <select id="cascoSeleccionado" data-slot hidden>
+          <option value="">-- Ninguno --</option>
+          <option value="casco_caballero_elite">Elite Knight Helm</option>
+        </select>
+      </div>
+
+      <div class="campo-slot">
+        <span class="etiqueta-slot">Armadura</span>
+        <select id="armaduraSeleccionada" data-slot hidden>
+          <option value="">-- Ninguna --</option>
+          <option value="armadura_caballero_elite">Elite Knight Armor</option>
+        </select>
+      </div>
+
+      <div class="campo-slot">
+        <span class="etiqueta-slot">Guantes</span>
+        <select id="guantesSeleccionados" data-slot hidden>
+          <option value="">-- Ninguno --</option>
+          <option value="guantes_caballero_elite">Elite Knight Gauntlets</option>
+        </select>
+      </div>
+
+      <div class="campo-slot">
+        <span class="etiqueta-slot">Botas</span>
+        <select id="botasSeleccionadas" data-slot hidden>
+          <option value="">-- Ninguna --</option>
+          <option value="botas_caballero_elite">Elite Knight Leggings</option>
+        </select>
+      </div>
     </section>
     
     <!-- Columna central: Personaje y stats -->
@@ -54,7 +61,6 @@
             <label>Faith: <input type="number" id="faith" value="10"></label>
             <label>Luck: <input type="number" id="luck" value="10"></label>
           </div>
-            <button type="button" id="btnCalcular">Calcular</button>
       </form>
 
       <div class="resultado">
@@ -82,19 +88,21 @@
     <!-- Columna derecha: Armas y accesorios -->
     <section class="panel panel-equipo">
       <h2>Equipo</h2>
-      <label>Arma (Mano Derecha):
-        <select id="armaDerechaSeleccionada">
-          <option value="">-- Ninguna --</option>
-          <option value="longsword">Longsword</option>
-          <option value="spear">Spear</option>
-          <option value="dagger">Dagger</option>
-          <option value="claymore">Claymore</option>
-          <option value="battle_axe">Battle Axe</option>
-        </select>
-      </label>
+    <div class="campo-slot">
+        <span class="etiqueta-slot">Arma (Mano Derecha)</span>
+          <select id="armaDerechaSeleccionada" data-slot hidden>
+            <option value="">-- Ninguna --</option>
+            <option value="longsword">Longsword</option>
+            <option value="spear">Spear</option>
+            <option value="dagger">Dagger</option>
+            <option value="claymore">Claymore</option>
+            <option value="battle_axe">Battle Axe</option>
+          </select>
+    </div>
 
-      <label>Arma (Mano Izquierda):
-        <select id="armaIzquierdaSeleccionada">
+    <div class="campo-slot">
+      <span class="etiqueta-slot">Arma (Mano Izquierda)</span>
+        <select id="armaIzquierdaSeleccionada" data-slot hidden>
           <option value="">-- Ninguna --</option>
           <option value="longsword">Longsword</option>
           <option value="spear">Spear</option>
@@ -102,47 +110,54 @@
           <option value="claymore">Claymore</option>
           <option value="battle_axe">Battle Axe</option>
         </select>
-      </label>
-      <label>Anillo 1:
-        <select id="anillo1Seleccionado">
-          <option value="">-- Ninguno --</option>
-          <option value="ring_favor">Ring of Favor</option>
-          <option value="hornet_ring">Hornet Ring</option>
-          <option value="flynns_ring">Flynn's Ring</option>
-        </select>
-    </label>
-    <label>Anillo 2:
-      <select id="anillo2Seleccionado">
+    </div>
+
+    <div class="campo-slot">
+      <span class="etiqueta-slot">Anillo 1</span>
+      <select id="anillo1Seleccionado" data-slot data-grupo="anillos" hidden>
         <option value="">-- Ninguno --</option>
         <option value="ring_favor">Ring of Favor</option>
         <option value="hornet_ring">Hornet Ring</option>
         <option value="flynns_ring">Flynn's Ring</option>
       </select>
-  </label>
-  <label>Anillo 3:
-  <select id="anillo3Seleccionado">
-    <option value="">-- Ninguno --</option>
-    <option value="ring_favor">Ring of Favor</option>
-    <option value="hornet_ring">Hornet Ring</option>
-    <option value="flynns_ring">Flynn's Ring</option>
-  </select>
-</label>
+    </div>
 
-<label>Anillo 4:
-  <select id="anillo4Seleccionado">
-    <option value="">-- Ninguno --</option>
-    <option value="ring_favor">Ring of Favor</option>
-    <option value="hornet_ring">Hornet Ring</option>
-    <option value="flynns_ring">Flynn's Ring</option>
-  </select>
-</label>
-      <h3 class="subtitulo">Hechizos</h3>
-      <div id="listaHechizos"></div>
+    <div class="campo-slot">
+      <span class="etiqueta-slot">Anillo 2</span>
+      <select id="anillo2Seleccionado" data-slot data-grupo="anillos" hidden>
+        <option value="">-- Ninguno --</option>
+        <option value="ring_favor">Ring of Favor</option>
+        <option value="hornet_ring">Hornet Ring</option>
+        <option value="flynns_ring">Flynn's Ring</option>
+      </select>
+    </div>
+
+    <div class="campo-slot">
+      <span class="etiqueta-slot">Anillo 3</span>
+      <select id="anillo3Seleccionado" data-slot data-grupo="anillos" hidden>
+        <option value="">-- Ninguno --</option>
+        <option value="ring_favor">Ring of Favor</option>
+        <option value="hornet_ring">Hornet Ring</option>
+        <option value="flynns_ring">Flynn's Ring</option>
+      </select>
+    </div>
+
+    <div class="campo-slot">
+      <span class="etiqueta-slot">Anillo 4</span>
+      <select id="anillo4Seleccionado" data-slot data-grupo="anillos" hidden>
+        <option value="">-- Ninguno --</option>
+        <option value="ring_favor">Ring of Favor</option>
+        <option value="hornet_ring">Hornet Ring</option>
+        <option value="flynns_ring">Flynn's Ring</option>
+      </select>
+    </div>
+<h3 class="subtitulo">Hechizos</h3>
+  <div id="listaHechizos"></div>
     </section>
-
   </div>
 
   <script src="script.js"></script>
   <script src="scriptjunior.js"></script>
+  <script src="slots.js"></script>
 </body>
 </html>

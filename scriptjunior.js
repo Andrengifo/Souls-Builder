@@ -18,7 +18,7 @@ for (const clave in datosJuego.hechizos) {
   contenedorHechizos.appendChild(etiqueta);
 }
 
-document.getElementById("btnCalcular").addEventListener("click", function() {
+function calcular() {
   const personajeActual = {
     vigor: Number(document.getElementById("vigor").value),
     attunement: Number(document.getElementById("attunement").value),
@@ -95,4 +95,10 @@ const avisos = obtenerAvisosHechizos(personajeActual, hechizosSeleccionados, cas
   document.getElementById("resultadoEquipLoad").textContent = `${equipLoad.toFixed(1)} / ${maxEquipLoad.toFixed(1)} unidades`;
   document.getElementById("resultadoPorcentaje").textContent = `${porcentaje.toFixed(1)}%`;
   document.getElementById("resultadoBanda").textContent = banda;
-});
+}
+
+// Recalcular en vivo cada vez que cambia un stat, un select o un hechizo
+document.querySelector(".contenedor-build").addEventListener("input", calcular);
+
+// Calcular una vez al cargar, para que no aparezcan los guiones "-"
+calcular();
