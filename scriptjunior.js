@@ -1,22 +1,3 @@
-// Crear la lista de hechizos a partir de los datos
-const contenedorHechizos = document.getElementById("listaHechizos");
-
-for (const clave in datosJuego.hechizos) {
-  const hechizo = datosJuego.hechizos[clave];
-
-  const etiqueta = document.createElement("label");
-  etiqueta.className = "hechizo";
-
-  const casilla = document.createElement("input");
-  casilla.type = "checkbox";
-  casilla.value = clave;
-
-  const texto = `${hechizo.nombre} (${hechizo.casillas} casilla${hechizo.casillas > 1 ? "s" : ""})`;
-
-  etiqueta.appendChild(casilla);
-  etiqueta.appendChild(document.createTextNode(texto));
-  contenedorHechizos.appendChild(etiqueta);
-}
 
 function calcular() {
   const personajeActual = {
@@ -32,22 +13,22 @@ function calcular() {
   };
 
   // 1. Leer todo lo equipado
-const nombreArmaDerecha = document.getElementById("armaDerechaSeleccionada").value;
-const armaDerecha = datosJuego.armas[nombreArmaDerecha] || null;
-const nombreArmaIzquierda = document.getElementById("armaIzquierdaSeleccionada").value;
-const armaIzquierda = datosJuego.armas[nombreArmaIzquierda] || null;
+  const nombreArmaDerecha = document.getElementById("armaDerechaSeleccionada").value;
+  const armaDerecha = datosJuego.armas[nombreArmaDerecha] || null;
+  const nombreArmaIzquierda = document.getElementById("armaIzquierdaSeleccionada").value;
+  const armaIzquierda = datosJuego.armas[nombreArmaIzquierda] || null;
 
-const casco = datosJuego.armaduras[document.getElementById("cascoSeleccionado").value] || null;
-const armadura = datosJuego.armaduras[document.getElementById("armaduraSeleccionada").value] || null;
-const guantes = datosJuego.armaduras[document.getElementById("guantesSeleccionados").value] || null;
-const botas = datosJuego.armaduras[document.getElementById("botasSeleccionadas").value] || null;
-const piezasArmadura = [casco, armadura, guantes, botas];
+  const casco = datosJuego.armaduras[document.getElementById("cascoSeleccionado").value] || null;
+  const armadura = datosJuego.armaduras[document.getElementById("armaduraSeleccionada").value] || null;
+  const guantes = datosJuego.armaduras[document.getElementById("guantesSeleccionados").value] || null;
+  const botas = datosJuego.armaduras[document.getElementById("botasSeleccionadas").value] || null;
+  const piezasArmadura = [casco, armadura, guantes, botas];
 
-const anillo1 = datosJuego.anillos[document.getElementById("anillo1Seleccionado").value] || null;
-const anillo2 = datosJuego.anillos[document.getElementById("anillo2Seleccionado").value] || null;
-const anillo3 = datosJuego.anillos[document.getElementById("anillo3Seleccionado").value] || null;
-const anillo4 = datosJuego.anillos[document.getElementById("anillo4Seleccionado").value] || null;
-const listaAnillos = [anillo1, anillo2, anillo3, anillo4];
+  const anillo1 = datosJuego.anillos[document.getElementById("anillo1Seleccionado").value] || null;
+  const anillo2 = datosJuego.anillos[document.getElementById("anillo2Seleccionado").value] || null;
+  const anillo3 = datosJuego.anillos[document.getElementById("anillo3Seleccionado").value] || null;
+  const anillo4 = datosJuego.anillos[document.getElementById("anillo4Seleccionado").value] || null;
+  const listaAnillos = [anillo1, anillo2, anillo3, anillo4];
 
   // 2. Equip load (va primero porque Flynn's Ring depende del peso)
   const equipLoad = calcularEquipLoad(armaDerecha, armaIzquierda, piezasArmadura, listaAnillos);
@@ -77,10 +58,14 @@ const listaAnillos = [anillo1, anillo2, anillo3, anillo4];
   const casillas = calcularCasillas(personajeActual.attunement);
 
   // 6.Leer hechizos seleccionados
-const hechizosSeleccionados = [];
-document.querySelectorAll("#listaHechizos input:checked").forEach(function(casilla) {
-  hechizosSeleccionados.push(datosJuego.hechizos[casilla.value]);
-});
+  const hechizosSeleccionados = [];
+  document.querySelectorAll("#listaHechizos select").forEach(function(select, i) {
+    // Solo cuentan las casillas visibles según el Attunement
+    if (i < casillas && select.value) {
+      hechizosSeleccionados.push(datosJuego.hechizos[select.value]);
+    }
+  });
+  mostrarSlotsHechizos(casillas);
 
 const casillasUsadas = calcularCasillasUsadas(hechizosSeleccionados);
 const avisos = obtenerAvisosHechizos(personajeActual, hechizosSeleccionados, casillas);

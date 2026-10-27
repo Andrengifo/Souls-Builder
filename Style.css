@@ -237,3 +237,30 @@ input[type="checkbox"] {
     transform: none;
   }
 }
+
+/* Nombre y detalle dentro de slots y opciones */
+.item-nombre {
+  display: block;
+  font-size: 0.9rem;
+}
+
+.item-detalle {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.7rem;
+  color: #999;
+}
+
+.slot-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Permite que las casillas crezcan si el detalle ocupa más de una línea */
+.slot-visual {
+  height: auto;
+  min-height: 64px;
+  padding: 8px;
+}
