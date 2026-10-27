@@ -1,6 +1,29 @@
-// Convierte cada <select data-slot> en una casilla visual con panel de selección
+// Convierte cada <select data-slot> en una casilla visual con panel desplegable
+
+let panelAbierto = null; // guarda el panel que está abierto en este momento
+
+function cerrarPanel() {
+  if (!panelAbierto) return;
+  panelAbierto.panel.remove();
+  panelAbierto.boton.classList.remove("slot-abierto");
+  document.removeEventListener("click", cerrarSiClicFuera);
+  document.removeEventListener("keydown", cerrarConEsc);
+  panelAbierto = null;
+}
+
+function cerrarSiClicFuera(evento) {
+  if (panelAbierto && !panelAbierto.contenedor.contains(evento.target)) {
+    cerrarPanel();
+  }
+}
+
+function cerrarConEsc(evento) {
+  if (evento.key === "Escape") cerrarPanel();
+}
 
 function crearSlot(select) {
+  const contenedor = select.parentElement; // el div .campo-slot
+
   const boton = document.createElement("button");
   boton.type = "button";
   boton.className = "slot-visual";
@@ -13,31 +36,18 @@ function crearSlot(select) {
   }
 
   boton.addEventListener("click", function() {
-    abrirPanel(select, actualizarBoton);
+    const eraEste = panelAbierto && panelAbierto.boton === boton;
+    cerrarPanel();
+    // Si el panel abierto era el de este mismo slot, solo se cierra
+    if (!eraEste) abrirPanel(select, boton, contenedor, actualizarBoton);
   });
 
   actualizarBoton();
 }
 
-function abrirPanel(select, alElegir) {
-  const fondo = document.createElement("div");
-  fondo.className = "panel-fondo";
-
-  const caja = document.createElement("div");
-  caja.className = "panel-seleccion";
-
-  const titulo = document.createElement("h3");
-  titulo.textContent = "Elige un ítem";
-  caja.appendChild(titulo);
-
-  function cerrar() {
-    fondo.remove();
-    document.removeEventListener("keydown", cerrarConEsc);
-  }
-
-  function cerrarConEsc(evento) {
-    if (evento.key === "Escape") cerrar();
-  }
+function abrirPanel(select, boton, contenedor, alElegir) {
+  const panel = document.createElement("div");
+  panel.className = "panel-desplegable";
 
   for (const opcion of select.options) {
     const item = document.createElement("button");
@@ -47,37 +57,35 @@ function abrirPanel(select, alElegir) {
 
     // Si el ítem ya está equipado en otro slot del mismo grupo, se bloquea
     if (opcion.value && select.dataset.grupo) {
-    const repetido = Array.from(
-    document.querySelectorAll(`select[data-grupo="${select.dataset.grupo}"]`)
-  ).some(function(otro) {
-    return otro !== select && otro.value === opcion.value;
-  });
+      const repetido = Array.from(
+        document.querySelectorAll(`select[data-grupo="${select.dataset.grupo}"]`)
+      ).some(function(otro) {
+        return otro !== select && otro.value === opcion.value;
+      });
 
-  if (repetido) {
-    item.disabled = true;
-    item.textContent += " (ya equipado)";
-  }
-}
+      if (repetido) {
+        item.disabled = true;
+        item.textContent += " (ya equipado)";
+      }
+    }
 
     item.addEventListener("click", function() {
       select.value = opcion.value;
       // Avisa al resto de la app para que recalcule en vivo
       select.dispatchEvent(new Event("input", { bubbles: true }));
       alElegir();
-      cerrar();
+      cerrarPanel();
     });
 
-    caja.appendChild(item);
+    panel.appendChild(item);
   }
 
-  // Clic fuera de la caja = cerrar
-  fondo.addEventListener("click", function(evento) {
-    if (evento.target === fondo) cerrar();
-  });
-  document.addEventListener("keydown", cerrarConEsc);
+  contenedor.appendChild(panel);
+  boton.classList.add("slot-abierto");
+  panelAbierto = { panel: panel, boton: boton, contenedor: contenedor };
 
-  fondo.appendChild(caja);
-  document.body.appendChild(fondo);
+  document.addEventListener("click", cerrarSiClicFuera);
+  document.addEventListener("keydown", cerrarConEsc);
 }
 
 document.querySelectorAll("select[data-slot]").forEach(crearSlot);

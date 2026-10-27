@@ -174,32 +174,6 @@ input[type="checkbox"] {
   color: var(--color-texto);
 }
 
-.panel-fondo {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 100;
-}
-
-.panel-seleccion {
-  background-color: var(--color-panel);
-  border: 1px solid var(--color-acento);
-  border-radius: 8px;
-  padding: 20px;
-  width: 300px;
-  max-width: 90%;
-  max-height: 80vh;
-  overflow-y: auto;
-}
-
-.panel-seleccion h3 {
-  color: var(--color-acento);
-  margin-top: 0;
-}
-
 .opcion-slot {
   display: block;
   width: 100%;
@@ -221,4 +195,45 @@ input[type="checkbox"] {
 
 .opcion-slot:disabled:hover {
   border-color: var(--color-borde);
+}
+/* Panel desplegable bajo cada slot */
+.campo-slot {
+  position: relative;
+}
+
+.panel-desplegable {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  margin-top: 4px;
+  padding: 8px;
+  max-height: 260px;
+  overflow-y: auto;
+  background-color: var(--color-panel);
+  border: 1px solid var(--color-acento);
+  border-radius: 6px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+  transform-origin: top;
+  animation: desplegar 0.15s ease-out;
+}
+
+.panel-desplegable .opcion-slot:last-child {
+  margin-bottom: 0;
+}
+
+.slot-visual.slot-abierto {
+  border-color: var(--color-acento);
+}
+
+@keyframes desplegar {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scaleY(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
