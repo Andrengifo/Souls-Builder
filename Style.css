@@ -214,3 +214,11 @@ input[type="checkbox"] {
 .opcion-slot:hover {
   border-color: var(--color-acento);
 }
+.opcion-slot:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.opcion-slot:disabled:hover {
+  border-color: var(--color-borde);
+}

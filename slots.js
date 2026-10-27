@@ -45,6 +45,20 @@ function abrirPanel(select, alElegir) {
     item.className = "opcion-slot";
     item.textContent = opcion.value ? opcion.text : "Quitar";
 
+    // Si el ítem ya está equipado en otro slot del mismo grupo, se bloquea
+    if (opcion.value && select.dataset.grupo) {
+    const repetido = Array.from(
+    document.querySelectorAll(`select[data-grupo="${select.dataset.grupo}"]`)
+  ).some(function(otro) {
+    return otro !== select && otro.value === opcion.value;
+  });
+
+  if (repetido) {
+    item.disabled = true;
+    item.textContent += " (ya equipado)";
+  }
+}
+
     item.addEventListener("click", function() {
       select.value = opcion.value;
       // Avisa al resto de la app para que recalcule en vivo
